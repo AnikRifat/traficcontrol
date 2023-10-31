@@ -15,8 +15,8 @@
                                 name="merchant" value="7F8C8D17FDCAA" /><input type="hidden" name="merchant_id"
                                 value="7" /><input type="hidden" name="item_name" value="Offence Payment" /><input
                                 type="hidden" name="currency_id" value="6" /><input type="hidden" name="order"
-                                value="$data->ticket_code" /><input type="hidden" name="amount"
-                                value="1" /><input type="hidden" name="custom" value="you have to pay tk 100" />
+                                value="{{ $data->ticket_code }}" /><input type="hidden" name="amount"
+                                value="{{ $data->OffenceType->fine }}" />
 
                             <button type="submit" class="btn btn-primary btn-block">Standard
                                 Payment</button>
@@ -24,8 +24,13 @@
 
                     </div>
                     <div class="col-md-6">
-                        <button type="button" class="btn btn-dark btn-block">Express
-                            Payment</button>
+                        <form action="{{ route('voyager.payment') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="total" value="{{ $data->OffenceType->fine }}">
+                            <button type="submit" class="btn btn-dark btn-block">Express
+                                Payment</button>
+                        </form>
+
 
                     </div>
                 </div>
