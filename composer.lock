@@ -65,20 +65,46 @@
             "time": "2023-01-10T21:23:24+00:00"
         },
         {
-            "name": "parvez/PayMoney",
-            "authors": [
-                {
-                    "name": "Robi Parvez",
-                    "email": "parvez.techvill@gmail.com"
-                }
-            ],
-            "require": {},
+            "name": "paymoney/php-sdk",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tuhintechvill/paymoney.git",
+                "reference": "7993411e19e485fc32632601eca5886fa375a8d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tuhintechvill/paymoney/zipball/7993411e19e485fc32632601eca5886fa375a8d5",
+                "reference": "7993411e19e485fc32632601eca5886fa375a8d5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
             "autoload": {
                 "psr-0": {
-                    "PayMoney": "vendor/paymoney_sdk/php-sdk/src/"
+                    "PayMoney": "src/"
                 }
-            }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": ["MIT"],
+            "authors": [
+                {
+                    "name": "Tuhin Hossain",
+                    "email": "tuhin.techvill@gmail.com"
+                }
+            ],
+            "description": "PayMoney Payment GateWay",
+            "support": {
+                "issues": "https://github.com/tuhintechvill/paymoney/issues",
+                "source": "https://github.com/tuhintechvill/paymoney/tree/v1.0"
+            },
+            "time": "2018-06-11T04:40:51+00:00"
         },
+   
         {
             "name": "asm89/stack-cors",
             "version": "v2.1.1",
