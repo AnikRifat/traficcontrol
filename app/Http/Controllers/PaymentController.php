@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
+use PayMoney\Api\Amount;
 use PayMoney\Api\Payer;
-
+use PayMoney\Api\Payment;
+use PayMoney\Api\RedirectUrls;
+use PayMoney\Api\Transaction;
 
 
 class PaymentController extends Controller
