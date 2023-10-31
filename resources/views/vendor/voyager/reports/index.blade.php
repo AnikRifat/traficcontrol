@@ -32,7 +32,7 @@
                                 <td>{{ $data->remarks }}</td>
                                 <td>{{ $data->OffenceType->fine }}</td>
                                 <td>
-                                    @if ($data->status == 1)
+                                    @if ($data->paid_status == 0)
                                         @if (Auth::user()->role_id == 7)
                                             <button class="btn btn-primary" data-toggle="modal"
                                                 data-target="#exampleModalCenter">Pay</button>
@@ -56,11 +56,11 @@
         </div>
         <!-- Modal -->
 
-        @if (Auth::user()->role_id == 7)
+        {{-- @if (Auth::user()->role_id == 7)
             <div class="card-title">
                 <p>Total Fine: ${{ $totalFine }}</p>
             </div>
-        @endif
+        @endif --}}
     </div>
 
 

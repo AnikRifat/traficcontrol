@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Offence;
 use Exception;
 use Illuminate\Http\Request;
 use PayMoney\Api\Amount;
@@ -26,8 +27,8 @@ class PaymentController extends Controller
         $trans->setAmount($amountIns);
 
         $urls = new RedirectUrls();
-        $urls->setSuccessUrl(url('/admin/reports/'))
-            ->setCancelUrl(url('/admin/reports'));
+        $urls->setSuccessUrl(url('/admin/payment/success'))
+            ->setCancelUrl(url('/admin/payment/cancel'));
 
         $payment = new Payment();
         $payment->setCredentials([
@@ -40,12 +41,26 @@ class PaymentController extends Controller
         try {
             // dd($payment->create());
             $payment->create();
+
+
             $url = $payment->getApprovedUrl();
+            $offence = Offence::find($data['offence']);
+            $offence->update(['paid_status' => 1]);
             return redirect($url);
         } catch (Exception $ex) {
             print $ex;
             exit;
-            return redirect()->back()->with(['message' => "Payment Unseccuessfull !", 'alert-type' => 'warning']);
+            return redirect()->back()->with(['message' => "Payment Unsuccuessfull !", 'alert-type' => 'warning']);
         }
+    }
+
+    public function cancel()
+    {
+        return redirect()->route('voyager.reports.index')->with(['message' => "Payment Canceled !", 'alert-type' => 'warning']);
+    }
+    public function success()
+    {
+        return redirect()->route('voyager.reports.index')->with(['message' => "Payment Succuessfull !", 'alert-type' => 'success']);
+
     }
 }

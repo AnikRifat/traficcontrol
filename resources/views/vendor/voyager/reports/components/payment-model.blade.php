@@ -27,6 +27,7 @@
                         <form action="{{ route('voyager.payment') }}" method="POST">
                             @csrf
                             <input type="hidden" name="total" value="{{ $data->OffenceType->fine }}">
+                            <input type="hidden" name="offence" value="{{ $data->id }}">
                             <button type="submit" class="btn btn-dark btn-block">Express
                                 Payment</button>
                         </form>
