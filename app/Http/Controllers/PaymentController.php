@@ -18,6 +18,9 @@ class PaymentController extends Controller
     {
 
         $data = $request->all();
+        $offence = Offence::find($data['offence']);
+
+
         $payer = new Payer();
         $payer->setPaymentMethod('PayMoney');
         $amountIns = new Amount();
@@ -27,8 +30,8 @@ class PaymentController extends Controller
         $trans->setAmount($amountIns);
 
         $urls = new RedirectUrls();
-        $urls->setSuccessUrl(url('/admin/payment/success'))
-            ->setCancelUrl(url('/admin/payment/cancel'));
+        $urls->setSuccessUrl(url('/admin/payment/success' . $offence->id))
+            ->setCancelUrl(url('/admin/payment/cancel' . $offence->id));
 
         $payment = new Payment();
         $payment->setCredentials([
@@ -44,8 +47,7 @@ class PaymentController extends Controller
 
 
             $url = $payment->getApprovedUrl();
-            $offence = Offence::find($data['offence']);
-            $offence->update(['paid_status' => 1]);
+
             return redirect($url);
         } catch (Exception $ex) {
             print $ex;
@@ -54,12 +56,16 @@ class PaymentController extends Controller
         }
     }
 
-    public function cancel()
+    public function cancel($id)
     {
+        $offence = Offence::find($id);
+        $offence->update(['paid_status' => 0]);
         return redirect()->route('voyager.reports.index')->with(['message' => "Payment Canceled !", 'alert-type' => 'warning']);
     }
-    public function success()
+    public function success($id)
     {
+        $offence = Offence::find($id);
+        $offence->update(['paid_status' => 1]);
         return redirect()->route('voyager.reports.index')->with(['message' => "Payment Succuessfull !", 'alert-type' => 'success']);
 
     }

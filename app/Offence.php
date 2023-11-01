@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class Offence extends Model
 {
+    protected $fillable = ['paid_status'];
     protected static function boot()
     {
+
         parent::boot();
 
         static::creating(function ($model) {
